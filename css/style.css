@@ -56,8 +56,30 @@
     width: 50%;
 }
 
+.center-img > h5 {
+    position: absolute;
+    text-align: center;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%)
+}
+
 .corn-container {
     background-color: #00c9e7;
     height: 100%;
     border-top-right-radius: 200px;
+}
+
+.avatar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.avatar > img {
+    position: absolute;
+    top: 100%;
+    left: 20%;
+    transform: translate(-50%, -100%);
+    width: 80%;
 }
