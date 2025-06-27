@@ -22,7 +22,7 @@ var runner = Runner.create()
 Runner.run(runner, engine)
 
 function preload() {
-  soyboi_image = loadImage('/images/soyboi_front.png')
+  soyboi_image = loadImage('./images/soyboi_front.png')
 }
 
 function setup() {
