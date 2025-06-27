@@ -36,9 +36,26 @@ function draw() {
   pegs.forEach(peg => {
     peg.show()
   })
+  dead = []
   bois.forEach(boi => {
     boi.show()
+    if (boi.body.position.y > window_height) {
+      dead.push(boi)
+      World.remove(world, boi.body)
+    }
   })
+
+  dead.forEach(boi => {
+    removeItem(bois, boi)
+  })
+
+function removeItem(arr, value) {
+  var index = arr.indexOf(value);
+  if (index > -1) {
+    arr.splice(index, 1);
+  }
+  return arr;
+}
   
   push()
   translate(mouseX-5, 0)
