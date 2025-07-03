@@ -47,15 +47,7 @@ function Bucket(x, mult) {
     endShape(CLOSE)
     pop()
 
-    push()
-    translate(this.x + this.width / 2, this.y - 100)
-    textAlign(CENTER)
-    textSize(20)
-    fill(255)
-    stroke(0)
-    strokeWeight(1.5)
-    text("x" + this.mult, 0, 0)
-    pop()
+    drawText("x" + this.mult, {x: this.x + this.width / 2, y: this.y - 100}, 20, 1.5, CENTER)
   }
 
   this.collision = function() {

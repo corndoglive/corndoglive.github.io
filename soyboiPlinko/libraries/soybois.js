@@ -43,16 +43,7 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
     pop()
 
     if (name != "") {
-      push()
-      translate(pos.x, pos.y - this.r -5)
-      textAlign(CENTER)
-      textSize(20)
-      fill(255)
-      stroke(0)
-      strokeWeight(1.5)
-      fill(color.r, color.g, color.b)
-      text(name, 0, 0)
-      pop()
+      drawText(name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, color)
     }
 
     if (!this.hitBottom) return

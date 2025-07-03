@@ -52,14 +52,7 @@ function draw() {
     pop()
   }
   
-  push()
-  translate(10, 20)
-  textSize(20)
-  fill(255)
-  stroke(0)
-  strokeWeight(4)
-  text("score", 0, 0)
-  pop()
+  drawText("score", {x: 10, y: 20}, 20)
   if (abs(drawnScore - score) > 5) {
     if (score - drawnScore > 300) drawnScore = score - 300
     if (score - drawnScore < -300) drawnScore = score + 300
@@ -67,14 +60,7 @@ function draw() {
   } else {
     drawnScore = score
   }
-  push()
-  translate(10, 65 + (score - drawnScore) / 20)
-  textSize(50 + (score - drawnScore) / 20)
-  fill(255)
-  stroke(0)
-  strokeWeight(4)
-  text(drawnScore, 0, 0)
-  pop()
+  drawText(drawnScore, {x: 10, y: 65 + (score - drawnScore) / 20}, 50 + (score - drawnScore) / 20)
 }
 
 function mousePressed() {
