@@ -1,3 +1,25 @@
+ParticleHandler = function() {
+    this.particleEmitters = []
+
+    this.addEmitter = function(emitter) {
+        this.particleEmitters.push(emitter)
+    }
+
+    this.show = function() {
+        dead = []
+        this.particleEmitters.forEach(emitter => {
+            emitter.show()
+            if (emitter.dead) {
+                dead.push(emitter)
+            }
+        })
+
+        dead.forEach(emitter => {
+            this.particleEmitters.removeItem(emitter)
+        })
+    }
+}
+
 ParticleEmitter = function(type, pos, collision) {
     this.pos = pos
     this.particles = []
