@@ -1,6 +1,16 @@
 function SoyboiHandler() {
     this.soybois = []
     
+    this.hasSoyboi = function(name) {
+      matches = false
+      this.soybois.forEach(soyboi => {
+        if (soyboi.name == name) {
+          matches = true
+        }
+      })
+      return matches
+    }
+
     this.addSoyboi = function(soyboi) {
         this.soybois.push(soyboi)
     }
@@ -42,8 +52,12 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
     image(soyboi_image, 0, 0)
     pop()
 
-    if (name != "") {
-      drawText(name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, color)
+    if (this.name != "") {
+      drawText(this.name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, color)
+    }
+    
+    if (pos.y > window_height) {
+        this.dead = true
     }
 
     if (!this.hitBottom) return
@@ -57,10 +71,6 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
         )
       )
       this.dead = true
-    }
-
-    if (pos.y > window_height) {
-        this.dead = true
     }
   }
 }
