@@ -14,7 +14,13 @@ function drawText(str, pos, size, strokeW = 4, align = LEFT, color = {r: 255, g:
   translate(pos.x, pos.y)
   textSize(size)
   textAlign(align)
-  fill(color.r, color.g, color.b)
+  try {
+    fill(color.r, color.g, color.b)
+  } catch (error) {
+    console.log("Unable to get color")
+    console.log(color)
+    fill(255, 255, 255)
+  }
   stroke(0)
   strokeWeight(strokeW)
   text(str, 0, 0)

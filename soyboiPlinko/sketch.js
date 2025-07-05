@@ -23,7 +23,7 @@ var score = 1
 var drawnScore = 1
 let params = new URL(window.location.href).searchParams
 
-soyboiHandler.addSoyboi(new Soyboi(200 + Math.random() * 100, 0, 18, "BFG_kerbybit", {r: 255, g: 105, b: 231}))
+//soyboiHandler.addSoyboi(new Soyboi(200 + Math.random() * 100, 0, 18, "BFG_kerbybit", {r: 255, g: 105, b: 231}))
 
 function preload() {
   soyboi_image = loadImage('./images/soyboi_front.png')
@@ -44,6 +44,7 @@ function draw() {
   bucketHandler.show()
   particleHandler.show()
   soyboiHandler.show()
+  draw_secret()
 
   if (params.get("mouse") == 1) {
     push()

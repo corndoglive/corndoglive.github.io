@@ -38,6 +38,7 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
   this.hitBottom = false
   this.fanale = 0
   this.dead = false
+  this.life = 900
 
   this.show = function() {
     var pos = this.body.position
@@ -58,6 +59,11 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
     
     if (pos.y > window_height) {
         this.dead = true
+    }
+
+    this.life--
+    if (this.life <= 0) {
+      this.hitBottom = true
     }
 
     if (!this.hitBottom) return
