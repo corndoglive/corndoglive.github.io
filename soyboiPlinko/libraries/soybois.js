@@ -78,5 +78,9 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
       )
       this.dead = true
     }
+
+    if (this.dead) {
+      World.remove(world, this.body)
+    }
   }
 }
