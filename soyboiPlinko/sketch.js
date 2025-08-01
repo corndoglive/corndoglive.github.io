@@ -62,7 +62,11 @@ function draw() {
   } else {
     drawnScore = score
   }
-  drawText(drawnScore, {x: 10, y: 65 + (score - drawnScore) / 20}, 50 + (score - drawnScore) / 20)
+  shownScore = drawnScore
+  if (shownScore > 1000000) {
+    shownScore = shownScore.toExponential(2)
+  }
+  drawText(shownScore, {x: 10, y: 65 + (score - drawnScore) / 20}, 50 + (score - drawnScore) / 20)
 }
 
 function mousePressed() {
