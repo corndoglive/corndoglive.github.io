@@ -29,6 +29,22 @@ function Bucket(x, mult) {
     {x: this.wall, y: -100}
   ]
 
+  this.alpha = 100
+
+  switch (this.mult) {
+    case 1.5:
+      this.color = {r: 250, g: 250, b: 130}
+      break
+    case 1:
+      this.color = {r: 250, g: 200, b: 130}
+      break
+    case 0.5:
+      this.color = {r: 250, g: 150, b: 100}
+      break
+    default:
+      this.color = {r: 100, g: 250, b: 100}
+  }
+
   this.floor = Bodies.rectangle(this.x, this.y, this.width, this.wall, {isStatic: true})
   World.add(world, this.floor)
   this.left = Bodies.rectangle(this.x, this.y - 50, this.wall, 100, {isStatic: true})
@@ -38,16 +54,35 @@ function Bucket(x, mult) {
 
   this.show = function() {
     this.collision()
+    
+    if (this.alpha > 100) {
+      this.alpha -= 5
+    }
+
     push()
     translate(this.x, this.y)
+    
+    let gradient = drawingContext.createLinearGradient(
+      0, -this.alpha, 0, 0
+    )
+    gradient.addColorStop(0, color(0, 0, 0, 0))
+    gradient.addColorStop(1, color(this.color.r, this.color.g, this.color.b, this.alpha))
+    drawingContext.fillStyle = gradient
+    strokeWeight(0)
+    rect(0, -200, this.width, 200)
+    
+    strokeWeight(1)
+    fill(this.color.r, this.color.g, this.color.b)
     beginShape()
     this.vertexes.forEach(vert => {
       vertex(vert.x, vert.y)
     })
     endShape(CLOSE)
+
+
     pop()
 
-    drawText("x" + this.mult, {x: this.x + this.width / 2, y: this.y - 100}, 20, 1.5, CENTER)
+    drawText("x" + this.mult, {x: this.x + this.width / 2, y: this.y - 10}, 30, 4, CENTER)
   }
 
   this.collision = function() {
@@ -58,6 +93,7 @@ function Bucket(x, mult) {
         && soyboi.body.position.x < this.x + this.width) {
         soyboi.hitBottom = true
         score = Math.ceil(score * this.mult)
+        this.alpha = 200
       }
     })
   }

@@ -1,8 +1,10 @@
 function PegHandler() {
     this.pegs = []
-    for (x = 1; x < 11; x++) {
-        for (y = 1; y < 11; y++) {
-            this.pegs.push(new Peg(x * 50 + (y % 2 * 25), y * 50 + 50))
+    i = 0
+    for (x = 1; x < 9; x++) {
+        i++
+        for (y = 1; y < 9; y++) {
+            this.pegs.push(new Peg(x * 65 + (y % 2 * 30) - 20, y * 60 + 60, i % 2))
         }
     }
 
@@ -23,22 +25,35 @@ function PegHandler() {
     }
 }
 
-function Peg(x, y) {
+function Peg(x, y, style) {
   this.offset = {x: 0, y: 0}
   this.x = x
   this.y = y
+  this.color = {r: 255, g: 255, b: 255}
+  if (style == 0) {
+    this.color = {r: 0, g: 170, b: 255}
+  } else if (style == 1) {
+    this.color = {r: 190, g: 120, b: 255}
+  }
 
-  this.r = 5
+  this.r = 10
   this.body = Bodies.circle(x, y, this.r, {isStatic: true})
   World.add(world, this.body)
 
   this.show = function() {
     var pos = this.body.position
-    this.offset.x = this.offset.x / 2
-    this.offset.y = this.offset.y / 2
+    this.offset.x = this.offset.x / 1.5
+    this.offset.y = this.offset.y / 1.5
+
+    push()
+    translate(pos.x + this.offset.x / 2, pos.y + this.offset.y / 2)
+    fill(0, 0, 0)
+    circle(3, 2, this.r*2)
+    pop()
 
     push()
     translate(pos.x + this.offset.x, pos.y + this.offset.y)
+    fill(this.color.r, this.color.g, this.color.b)
     circle(0, 0, this.r*2)
     pop()
   }
