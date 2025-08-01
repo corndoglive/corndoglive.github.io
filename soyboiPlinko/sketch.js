@@ -36,7 +36,7 @@ function setup() {
 
 function draw() {
   clear()
-  background(0, 0, 0, 20)
+  background(255, 255, 255, 100)
   if (params.get("back") == 1) {
     background(200, 200, 200)
   }

@@ -29,7 +29,7 @@ function Bucket(x, mult) {
     {x: this.wall, y: -100}
   ]
 
-  this.alpha = 100
+  this.alpha = 150
 
   switch (this.mult) {
     case 1.5:
@@ -55,17 +55,17 @@ function Bucket(x, mult) {
   this.show = function() {
     this.collision()
     
-    if (this.alpha > 100) {
-      this.alpha -= 5
+    if (this.alpha > 150) {
+      this.alpha -= (this.alpha / 50)
     }
 
     push()
     translate(this.x, this.y)
     
     let gradient = drawingContext.createLinearGradient(
-      0, -this.alpha, 0, 0
+      0, -this.alpha + 50, 0, -50
     )
-    gradient.addColorStop(0, color(0, 0, 0, 0))
+    gradient.addColorStop(0, color(255, 255, 255, 0))
     gradient.addColorStop(1, color(this.color.r, this.color.g, this.color.b, this.alpha))
     drawingContext.fillStyle = gradient
     strokeWeight(0)
@@ -93,7 +93,7 @@ function Bucket(x, mult) {
         && soyboi.body.position.x < this.x + this.width) {
         soyboi.hitBottom = true
         score = Math.ceil(score * this.mult)
-        this.alpha = 200
+        this.alpha = 255
       }
     })
   }
