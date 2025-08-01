@@ -54,7 +54,7 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
     pop()
 
     if (this.name != "") {
-      drawText(this.name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, color)
+      drawText(this.name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, color, false)
     }
     
     if (pos.y > window_height) {

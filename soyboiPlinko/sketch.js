@@ -6,8 +6,8 @@ var Engine = Matter.Engine,
   Events = Matter.Events
 
 
-let window_width = 574
-let window_height = 700
+let window_width = 614
+let window_height = 715
 
 let engine = Engine.create()
 let world = engine.world
@@ -36,10 +36,15 @@ function setup() {
 
 function draw() {
   clear()
-  background(255, 255, 255, 100)
   if (params.get("back") == 1) {
     background(200, 200, 200)
   }
+
+  push()
+  strokeWeight(0)
+  fill(200, 200, 200, 100)
+  rect(0, 0, window_width, window_height, 40)
+  pop()
 
   pegHandler.show()
   bucketHandler.show()
@@ -54,7 +59,7 @@ function draw() {
     pop()
   }
   
-  drawText("score", {x: 10, y: 20}, 20)
+  drawText("score", {x: 20, y: 30}, 30)
   if (abs(drawnScore - score) > 5) {
     if (score - drawnScore > 300) drawnScore = score - 300
     if (score - drawnScore < -300) drawnScore = score + 300
@@ -66,7 +71,7 @@ function draw() {
   if (shownScore > 1000000) {
     shownScore = shownScore.toExponential(2)
   }
-  drawText(shownScore, {x: 10, y: 65 + (score - drawnScore) / 20}, 50 + (score - drawnScore) / 20)
+  drawText(shownScore, {x: 20, y: 80 + (score - drawnScore) / 20}, 50 + (score - drawnScore) / 20)
 }
 
 function mousePressed() {

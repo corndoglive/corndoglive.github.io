@@ -9,11 +9,19 @@ function getRandomFloat(min, max) {
   return Math.random() * (max - min) + min
 }
 
-function drawText(str, pos, size, strokeW = 4, align = LEFT, color = {r: 255, g: 255, b: 255}) {
+function drawText(str, pos, size, strokeW = 4, align = LEFT, color = {r: 255, g: 255, b: 255}, shadow = true) {
   push()
   translate(pos.x, pos.y)
   textSize(size)
   textAlign(align)
+  stroke(0)
+  strokeWeight(strokeW)
+
+  
+  if (shadow) {
+    fill(0, 0, 0)
+    text(str, 3, 2)
+  }
   try {
     fill(color.r, color.g, color.b)
   } catch (error) {
@@ -21,9 +29,9 @@ function drawText(str, pos, size, strokeW = 4, align = LEFT, color = {r: 255, g:
     console.log(color)
     fill(255, 255, 255)
   }
-  stroke(0)
-  strokeWeight(strokeW)
   text(str, 0, 0)
+
+
   pop()
 }
 

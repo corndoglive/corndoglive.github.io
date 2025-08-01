@@ -14,6 +14,6 @@ client.on('message', (channel, tags, message, self) => {
     user = tags['display-name']
     col = tags['color']
     if (!soyboiHandler.hasSoyboi(user)) {
-        soyboiHandler.addSoyboi(new Soyboi(200 + Math.random() * 100, 0, 18, user, hexToRgb(col)))
+        soyboiHandler.addSoyboi(new Soyboi((window_width / 2 - 100) + Math.random() * 200, 0, 18, user, hexToRgb(col)))
     }
 })

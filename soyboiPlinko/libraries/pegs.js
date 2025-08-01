@@ -4,7 +4,7 @@ function PegHandler() {
     for (x = 1; x < 9; x++) {
         i++
         for (y = 1; y < 9; y++) {
-            this.pegs.push(new Peg(x * 65 + (y % 2 * 30) - 20, y * 60 + 60, i % 2))
+            this.pegs.push(new Peg(x * 65 + (y % 2 * 30), y * 60 + 60, i % 2))
         }
     }
 

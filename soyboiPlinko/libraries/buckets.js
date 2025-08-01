@@ -2,7 +2,7 @@ function BucketHandler() {
     this.buckets = []
     for (x = 0; x < 7; x++) {
         mult = Math.abs(Math.abs(x - 3) - 4)/2
-        this.buckets.push(new Bucket(x * 82, mult))
+        this.buckets.push(new Bucket(x * 82 + 20, mult))
     }
 
     this.show = function() {
@@ -14,7 +14,7 @@ function BucketHandler() {
 
 function Bucket(x, mult) {
   this.x = x
-  this.y = window_height - 5
+  this.y = window_height - 20
   this.width = 82
   this.mult = mult
   this.wall = 5
@@ -72,6 +72,14 @@ function Bucket(x, mult) {
     rect(0, -200, this.width, 200)
     
     strokeWeight(1)
+
+    fill(0, 0, 0)
+    beginShape()
+    this.vertexes.forEach(vert => {
+      vertex(vert.x + 3, vert.y + 2)
+    })
+    endShape(CLOSE)
+
     fill(this.color.r, this.color.g, this.color.b)
     beginShape()
     this.vertexes.forEach(vert => {
