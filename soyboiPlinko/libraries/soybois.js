@@ -40,6 +40,13 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
   this.dead = false
   this.life = 900
 
+  this.image = soyboi_images[0].image
+  soyboi_images.forEach(image => {
+    if (image.name == this.name) {
+      this.image = image.image
+    }
+  })
+
   this.show = function() {
     var pos = this.body.position
     var angle = this.body.angle
@@ -50,7 +57,7 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
     //circle(0, 0, this.r*2)
     translate(-21, -40)
     scale(this.r / 300 + this.fanale / 1000)
-    image(soyboi_image, 0, 0)
+    image(this.image, 0, 0)
     pop()
 
     if (this.name != "") {

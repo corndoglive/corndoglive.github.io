@@ -26,7 +26,12 @@ let params = new URL(window.location.href).searchParams
 //soyboiHandler.addSoyboi(new Soyboi(200 + Math.random() * 100, 0, 18, "BFG_kerbybit", {r: 255, g: 105, b: 231}))
 
 function preload() {
-  soyboi_image = loadImage('./images/soyboi_front.png')
+  soyboi_images = [
+    {name: "default", image: loadImage("./images/soyboi_front.png")},
+    {name: "Tinfox2", image: loadImage("./images/soyboi_evil.png")},
+    {name: "Nightbot", image: loadImage("./images/soyboi_bot.png")},
+    {name: "StreamElements", image: loadImage("./images/soyboi_bot.png")}
+  ]
 }
 
 function setup() {
@@ -38,6 +43,15 @@ function draw() {
   clear()
   if (params.get("back") == 1) {
     background(200, 200, 200)
+  }
+
+  if (params.get("mask") == 1) {
+    push()
+    strokeWeight(0)
+    fill(255, 255, 255, 255)
+    rect(0, 0, window_width, window_height, 40)
+    pop()
+    return
   }
 
   push()
