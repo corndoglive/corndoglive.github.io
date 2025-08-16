@@ -21,6 +21,18 @@ client.on('message', (channel, tags) => {
 client.on('subscription', (channel, username) => {
   subscribe(username)
 })
+client.on("resub", (channel, username) => {
+  subscribe(username)
+})
+client.on("subgift", (channel, username) => {
+  subscribe(username)
+})
+client.on("submysterygift", (channel, username) => {
+  subscribe(username)
+})
+client.on("raided", (channel, username) => {
+  subscribe(username)
+})
 
 function subscribe(username) {
   for (i = 0; i < 5; i++) {
