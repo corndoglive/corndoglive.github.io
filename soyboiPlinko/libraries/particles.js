@@ -29,12 +29,12 @@ ParticleEmitter = function(type, pos, collision) {
   switch(type) {
     case 'impact':
       for (let i = 0; i < 10; i++) {
-        vel = {
+        const vel = {
           x: collision.tangent.x * getRandomFloat(-4, 4), 
           y: collision.tangent.y * getRandomFloat(-4, 4)
         }
-        life = Math.random() * 20
-        col = {
+        const life = Math.random() * 20
+        const col = {
           r: getRandomFloat(220, 255),
           g: getRandomFloat(220, 255),
           b: 0
@@ -44,16 +44,16 @@ ParticleEmitter = function(type, pos, collision) {
       break
     case 'explode':
       for (let i = 0; i < 20; i++) {
-        vel = {
+        const vel = {
           x: getRandomFloat(-10, 10),
           y: getRandomFloat(-10, -15)
         }
-        size = {
+        const size = {
           w: getRandomFloat(10, 20),
           h: getRandomFloat(10, 20)
         }
-        life = Math.random() * 50
-        col = {
+        const life = Math.random() * 50
+        const col = {
           r: getRandomFloat(188, 251),
           g: getRandomFloat(243, 253),
           b: getRandomFloat(160, 166)
@@ -66,7 +66,7 @@ ParticleEmitter = function(type, pos, collision) {
   }
 
   this.show = function() {
-    dead = []
+    let dead = []
     this.particles.forEach(particle => {
       particle.show()
       if (particle.dead) {
