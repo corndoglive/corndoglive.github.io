@@ -60,8 +60,8 @@ function draw() {
   rect(0, 0, window_width, window_height, 40)
   pop()
 
-  pegHandler.show()
   bucketHandler.show()
+  pegHandler.show()
   particleHandler.show()
   soyboiHandler.show()
   draw_secret()
