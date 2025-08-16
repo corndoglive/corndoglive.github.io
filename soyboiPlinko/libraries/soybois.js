@@ -4,7 +4,7 @@ class SoyboiHandler {
     this.delayed_soybois = []
     
     this.hasSoyboi = function(name) {
-      matches = false
+      let matches = false
       this.soybois.forEach(soyboi => {
         if (soyboi.name == name) {
           matches = true
