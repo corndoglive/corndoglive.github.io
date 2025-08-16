@@ -88,8 +88,14 @@ function draw() {
   drawText(shownScore, {x: 20, y: 80 + (score - drawnScore) / 20}, 50 + (score - drawnScore) / 20)
 }
 
-function mousePressed() {
-  soyboiHandler.addSoyboi(new Soyboi(mouseX, 0, 18))
+function mousePressed(event) {
+  //used mostly for debugging
+  if (event.button == 2) {
+    //test subscription event
+    subscribe("test")
+  } else {
+    soyboiHandler.addSoyboi(new Soyboi(mouseX))
+  }
 }
 
 Events.on(engine, 'collisionStart', event => {

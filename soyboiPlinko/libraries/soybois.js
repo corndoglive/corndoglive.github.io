@@ -1,5 +1,7 @@
-function SoyboiHandler() {
+class SoyboiHandler {
+  constructor() {
     this.soybois = []
+    this.delayed_soybois = []
     
     this.hasSoyboi = function(name) {
       matches = false
@@ -11,43 +13,73 @@ function SoyboiHandler() {
       return matches
     }
 
-    this.addSoyboi = function(soyboi) {
+    this.addSoyboi = function(soyboi, delay = 0) {
+      if (delay == 0) {
         this.soybois.push(soyboi)
+      }
+      else {
+        this.delayed_soybois.push({soyboi: soyboi, delay: delay})
+      }
     }
+  }
 
-    this.show = function() {
-        dead = []
-        this.soybois.forEach(soyboi => {
-            soyboi.show()
-            if (soyboi.dead) {
-                dead.push(soyboi)
-            }
-        })
+  show() {
+    let dead = []
+    this.soybois.forEach(soyboi => {
+      soyboi.show()
+      if (soyboi.dead) {
+        dead.push(soyboi)
+      }
+    })
 
-        dead.forEach(soyboi => {
-            this.soybois.removeItem(soyboi)
-        })
-    }
+    dead.forEach(soyboi => {
+      this.soybois.removeItem(soyboi)
+    })
+
+    dead == []
+    this.delayed_soybois.forEach(delayed_soyboi => {
+      delayed_soyboi.delay--
+      if (delayed_soyboi.delay <= 0) {
+        this.soybois.push(delayed_soyboi.soyboi)
+        dead.push(delayed_soyboi)
+      }
+    })
+
+    dead.forEach(soyboi => {
+      this.delayed_soybois.removeItem(soyboi)
+    })
+  }
 }
 
-function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
-  this.r = r
-  this.body = Bodies.circle(x, y, this.r, {mass: 10, restitution: 0.9})
-  World.add(world, this.body)
-  this.name = name
-  this.hitBottom = false
-  this.fanale = 0
-  this.dead = false
-  this.life = 900
+class Soyboi {
+  constructor(x, name = "", color = Colors.WHITE) {
+    this.name = name
+    this.color = color
 
-  this.image = soyboi_images[0].image
-  soyboi_images.forEach(image => {
-    if (image.name == this.name) {
-      this.image = image.image
+    this.r = 18
+    this.body = Bodies.circle(x, 0, this.r, {mass: 10, restitution: 0.9})
+    
+    this.shown = false
+    this.hitBottom = false
+    this.fanale = 0
+    this.dead = false
+    this.life = 900
+
+    this.image = soyboi_images[0].image
+    soyboi_images.forEach(image => {
+      if (image.name == this.name) {
+        this.image = image.image
+      }
+    })
+  }
+  
+
+  show() {
+    if (!this.shown) {
+      this.shown = true
+      World.add(world, this.body)
     }
-  })
 
-  this.show = function() {
     var pos = this.body.position
     var angle = this.body.angle
 
@@ -61,11 +93,11 @@ function Soyboi(x, y, r, name = "", color = {r: 255, g: 255, b: 255}) {
     pop()
 
     if (this.name != "") {
-      drawText(this.name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, color, false)
+      drawText(this.name, {x: pos.x, y: pos.y - this.r - 5}, 20, 1.5, CENTER, this.color, false)
     }
     
     if (pos.y > window_height) {
-        this.dead = true
+      this.dead = true
     }
 
     this.life--

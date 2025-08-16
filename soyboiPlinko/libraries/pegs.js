@@ -1,47 +1,51 @@
-function PegHandler() {
+class PegHandler {
+  constructor() {
     this.pegs = []
-    i = 0
-    for (x = 1; x < 9; x++) {
+    let i = 0
+    for (let x = 1; x < 9; x++) {
         i++
-        for (y = 1; y < 9; y++) {
+        for (let y = 1; y < 9; y++) {
             this.pegs.push(new Peg(x * 65 + (y % 2 * 30), y * 60 + 60, i % 2))
         }
     }
-
-    this.collide = function(event) {
-      collided = event.pairs[0].bodyA //peg is always body A (created first)
-      collision = event.pairs[0].collision
-      this.pegs.forEach(peg => {
-        if (peg.body === collided) {
-          peg.collision(collision)
-        }
-      })
-    }
-
-    this.show = function() {
-        this.pegs.forEach(peg => {
-            peg.show()
-        })
-    }
-}
-
-function Peg(x, y, style) {
-  this.offset = {x: 0, y: 0}
-  this.x = x
-  this.y = y
-  this.color = {r: 255, g: 255, b: 255}
-  if (style == 0) {
-    this.color = {r: 0, g: 170, b: 255}
-  } else if (style == 1) {
-    this.color = {r: 190, g: 120, b: 255}
   }
 
-  this.r = 10
-  this.body = Bodies.circle(x, y, this.r, {isStatic: true})
-  World.add(world, this.body)
+  collide(event) {
+    const collided = event.pairs[0].bodyA //peg is always body A (created first)
+    const collision = event.pairs[0].collision
+    this.pegs.forEach(peg => {
+      if (peg.body === collided) {
+        peg.collision(collision)
+      }
+    })
+  }
 
-  this.show = function() {
-    var pos = this.body.position
+  show() {
+    this.pegs.forEach(peg => {
+      peg.show()
+    })
+  }
+}
+
+class Peg {
+  constructor(x, y, style) {
+    this.offset = {x: 0, y: 0}
+    this.x = x
+    this.y = y
+    this.color = {r: 255, g: 255, b: 255}
+    if (style == 0) {
+      this.color = {r: 0, g: 170, b: 255}
+    } else if (style == 1) {
+      this.color = {r: 190, g: 120, b: 255}
+    }
+
+    this.r = 10
+    this.body = Bodies.circle(x, y, this.r, {isStatic: true})
+    World.add(world, this.body)
+  }
+  
+  show() {
+    const pos = this.body.position
     this.offset.x = this.offset.x / 1.5
     this.offset.y = this.offset.y / 1.5
 
@@ -58,7 +62,7 @@ function Peg(x, y, style) {
     pop()
   }
 
-  this.collision = function(collision) {
+  collision(collision) {
     score += 1
     this.offset = {
       x: collision.normal.x * 5, 
